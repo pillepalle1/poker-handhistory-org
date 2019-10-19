@@ -10,7 +10,7 @@ namespace poker_handhistory_org
     /// 
     /// <para>The pot object defining the pot and results for the hand</para>
     /// </summary>
-    class PotObject
+    public class PotObject
     {
         /// <summary>
         /// The pot object defining the pot and results for the hand.

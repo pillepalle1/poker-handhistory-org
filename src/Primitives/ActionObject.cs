@@ -10,7 +10,7 @@ namespace poker_handhistory_org
     /// 
     /// <para>The action object defining the action within the round</para>
     /// </summary>
-    class ActionObject
+    public class ActionObject
     {
         /// <summary>
         /// Creates a new ActionObject

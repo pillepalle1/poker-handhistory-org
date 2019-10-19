@@ -10,7 +10,7 @@ namespace poker_handhistory_org
     /// 
     /// <para>The object defining the win amount of the players in a pot</para>
     /// </summary>
-    class PlayerWinsObject
+    public class PlayerWinsObject
     {
         /// <summary>
         /// Creates a new PlayerWinsObject

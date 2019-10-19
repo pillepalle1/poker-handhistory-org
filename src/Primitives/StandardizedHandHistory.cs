@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,14 +10,96 @@ namespace poker_handhistory_org
     /// 
     /// <para>Standardized Hand History Specification.</para>
     /// </summary>
-    class StandardizedHandHistory
+    public class StandardizedHandHistory
     {
         private const string SPECIFICATION_VERSION = "1.0.0";
         private const string SPECIFICATION_INTERNAL_VERSION = "1.0.5";
 
         /// <summary>
+        /// Creates a new Standardized Hand History Object
+        /// </summary>
+        /// <param name="heroPlayerId">The Id of the player (from the list of players in the player list) that is the hero.</param>
+        /// <param name="siteName">The name of the poker site.</param>
+        /// <param name="networkName">The name of the network that the client site belongs to.</param>
+        /// <param name="gameNumber">The game number or other identifier that uniquely identifies the hand on the network.</param>
+        /// <param name="gameType">The type of game being played.</param>
+        /// <param name="betLimit">The limitations on the betting for the game.</param>
+        /// <param name="startDateUtc">The date and time at the start of the hand.</param>
+        /// <param name="tableName">The name of the table.</param>
+        /// <param name="tableSize">Number of seats at the table that are available for players to be seated.</param>
+        /// <param name="dealerSeat">The seat number of the button.</param>
+        /// <param name="currency">The currency of the game or tournament buy-in and fee.</param>
+        /// <param name="sbAmount">The amount of the small blind (in the currency specified).</param>
+        /// <param name="bbAmount">The amount of the big blind (in the currency specified).</param>
+        /// <param name="anteAmount">The amount of the ante, for all players, in the currency specified.</param>
+        /// <param name="flags">Hand flags that may be relevant. Special characteristics about a hand that may be needed to fully understand the hand. This is easily expanded without hand history format change.</param>
+        /// <param name="players">An array of <player_obj> objects for all of the players dealt into the hand.</param>
+        /// <param name="rounds">An array of <round_obj> objects betting rounds that occurred within the hand. Every hand must have one round 0 (Pre-Flop) and one round 4 (Showdown).</param>
+        /// <param name="pots">The pots and pot results for the hand.</param>
+        /// <param name="tournamentInfo">A JSON object collection of tournament specific properties.</param>
+        /// <param name="rebuys">The re-buys, add-ons and re-entries that occurred within the hand.</param>
+        /// <param name="bounties">Bounties received by a player in the hand.</param>
+        public StandardizedHandHistory(
+            int heroPlayerId,
+
+            string siteName, 
+            string networkName, 
+            
+            string gameNumber,
+            string gameType,
+            BetLimitObject betLimit,
+            
+            DateTime startDateUtc, 
+            
+            string tableName, 
+            int tableSize,
+            int dealerSeat,
+
+            string currency, 
+            double sbAmount, 
+            double bbAmount, 
+
+            double? anteAmount, 
+
+            string[] flags, 
+
+            PlayerObject[] players, 
+            RoundObject[] rounds, 
+            PotObject[] pots, 
+
+            TournamentInfoObject tournamentInfo = null, 
+            TournamentRebuyObject[] rebuys = null, 
+            TournamentBountyObject[] bounties = null)
+        {
+            HeroPlayerId = heroPlayerId;
+            Site = siteName;
+            Network = networkName;
+            GameNumber = gameNumber;
+            GameType = gameType;
+            Limit = betLimit;
+            StartDateUtc = startDateUtc.ToString("o");
+            TableName = tableName;
+            TableSize = tableSize;
+            DealerSeat = dealerSeat;
+            Currency = currency;
+            SmallBlindAmount = sbAmount;
+            BigBlindAmount = bbAmount;
+            Ante = anteAmount;
+            Flags = flags;
+
+            Players = players;
+            BettingRounds = rounds;
+            Pots = pots;
+
+            TournamentInfo = tournamentInfo;
+            Rebuys = rebuys;
+            Bounties = bounties;
+        }
+
+        /// <summary>
         /// A string with information describing the version of the specification.
         /// </summary>
+        [JsonProperty("spec_version")]
         public string Version
         {
             get
@@ -28,6 +111,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// The name of the poker site.
         /// </summary>
+        [JsonProperty("size_name")]
         public string Site
         {
             get;
@@ -37,6 +121,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// The name of the network that the client site belongs to.
         /// </summary>
+        [JsonProperty("network_name")]
         public string Network
         {
             get;
@@ -54,6 +139,7 @@ namespace poker_handhistory_org
         /// It is recommended but not required to increment the major and minor versions of the internal_version to match the spec_version and bug fixes increment the patch number.
         /// </para>
         /// </summary>
+        [JsonProperty("internal_version")]
         public string InternalVersion
         {
             get
@@ -69,6 +155,7 @@ namespace poker_handhistory_org
         /// Required: cash games=no, optional for tournaments/sit n' go's if applicable.
         /// </para>
         /// </summary>
+        [JsonProperty("tournament_info")]
         public TournamentInfoObject TournamentInfo
         {
             get;
@@ -78,6 +165,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// The game number or other identifier that uniquely identifies the hand on the network.
         /// </summary>
+        [JsonProperty("game_number")]
         public string GameNumber
         {
             get;
@@ -91,6 +179,7 @@ namespace poker_handhistory_org
         /// Format: ISO8601 format. "yyyy-mm-ddThh:mm:ssZ" | See section 5.8 in the RFC: https://tools.ietf.org/html/rfc3339#section-5.8
         /// </para>
         /// </summary>
+        [JsonProperty("start_date_utc")]
         public string StartDateUtc
         {
             get;
@@ -106,6 +195,7 @@ namespace poker_handhistory_org
         /// </para>
         /// 
         /// </summary>
+        [JsonProperty("table_name")]
         public string TableName
         {
             get;
@@ -123,6 +213,7 @@ namespace poker_handhistory_org
         /// to support the new game type.
         /// </para>
         /// </summary>
+        [JsonProperty("game_type")]
         public string GameType
         {
             get;
@@ -132,7 +223,8 @@ namespace poker_handhistory_org
         /// <summary>
         /// The limitations on the betting for the game.
         /// </summary>
-        public string Limit
+        [JsonProperty("bet_limit")]
+        public BetLimitObject Limit
         {
             get;
             private set;
@@ -149,7 +241,8 @@ namespace poker_handhistory_org
         /// Format: Integer from 2 to 10 seats
         /// </para>
         /// </summary>
-        public string TableSize
+        [JsonProperty("table_size")]
+        public int TableSize
         {
             get;
             private set;
@@ -167,6 +260,7 @@ namespace poker_handhistory_org
         /// should be three characters and not conflict with any existing currencies.
         /// </para>
         /// </summary>
+        [JsonProperty("curency")]
         public string Currency
         {
             get;
@@ -176,6 +270,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// The seat number of the button.
         /// </summary>
+        [JsonProperty("dealer_seat")]
         public int DealerSeat
         {
             get;
@@ -185,6 +280,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// The amount of the small blind (in the currency specified).
         /// </summary>
+        [JsonProperty("small_blind_amount")]
         public double SmallBlindAmount
         {
             get;
@@ -194,6 +290,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// The amount of the big blind (in the currency specified).
         /// </summary>
+        [JsonProperty("big_blind_amount")]
         public double BigBlindAmount
         {
             get;
@@ -205,6 +302,7 @@ namespace poker_handhistory_org
         /// 
         /// <para>if the game does not have antes then "ante_amount" can either be ommitted, set to null or set to 0.</para>
         /// </summary>
+        [JsonProperty("ante_amount", NullValueHandling = NullValueHandling.Ignore)]
         public double? Ante
         {
             get;
@@ -214,6 +312,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// The Id of the player (from the list of players in the player list) that is the hero.
         /// </summary>
+        [JsonProperty("hero_player_id")]
         public int HeroPlayerId
         {
             get;
@@ -235,6 +334,7 @@ namespace poker_handhistory_org
         /// specification at which point we will add it and increase the specification version number.
         /// </para>
         /// </summary>
+        [JsonProperty("flags")]
         public string[] Flags
         {
             get;
@@ -244,6 +344,7 @@ namespace poker_handhistory_org
         /// <summary>
         /// An array of <player_obj> objects for all of the players dealt into the hand.
         /// </summary>
+        [JsonProperty("players")]
         public PlayerObject[] Players
         {
             get;
@@ -254,6 +355,7 @@ namespace poker_handhistory_org
         /// An array of <round_obj> objects betting rounds that occurred within the hand.
         /// Every hand must have one round 0 (Pre-Flop) and one round 4 (Showdown).
         /// </summary>
+        [JsonProperty("rounds")]
         public RoundObject[] BettingRounds
         {
             get;
@@ -263,7 +365,8 @@ namespace poker_handhistory_org
         /// <summary>
         /// The pots and pot results for the hand.
         /// </summary>
-        public PlayerObject[] Pots
+        [JsonProperty("pots")]
+        public PotObject[] Pots
         {
             get;
             private set;
@@ -274,6 +377,7 @@ namespace poker_handhistory_org
         /// 
         /// <para>For tournaments and sit n' go's only.  Omit for cash games.</para>
         /// </summary>
+        [JsonProperty("tournament_rebuys")]
         public TournamentRebuyObject[] Rebuys
         {
             get;
@@ -285,6 +389,7 @@ namespace poker_handhistory_org
         /// 
         /// <para>For tournaments and sit n' go's only.  Omit for cash games.</para>
         /// </summary>
+        [JsonProperty("tournament_bounties")]
         public TournamentBountyObject[] Bounties
         {
             get;

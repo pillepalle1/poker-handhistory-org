@@ -11,7 +11,7 @@ namespace poker_handhistory_org
     /// 
     /// <para>The round object defining the betting rounds that occurred during the hand</para>
     /// </summary>
-    class RoundObject
+    public class RoundObject
     {
         /// <summary>
         /// Creates a new RoundObject

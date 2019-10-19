@@ -12,7 +12,7 @@ namespace poker_handhistory_org
     /// Speed.
     /// </para>
     /// </summary>
-    class SpeedObject
+    public class SpeedObject
     {
         /// <summary>
         /// Speed.

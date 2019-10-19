@@ -11,14 +11,14 @@ namespace poker_handhistory_org
     /// 
     /// <para>The bet limit object which defines the betting limitations of the game</para>
     /// </summary>
-    class BetLimitObject
+    public class BetLimitObject
     {
         /// <summary>
         /// Creates a new instance of a BetLimitObject
         /// </summary>
         /// <param name="betType">The betting type for the game</param>
         /// <param name="betCap">The cap on bets for the game</param>
-        public BetLimitObject(EBetType betType, double betCap)
+        public BetLimitObject(EBetType betType, double? betCap)
         {
             BetType = betType;
             BetCap = betCap;

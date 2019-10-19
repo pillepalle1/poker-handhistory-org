@@ -14,7 +14,7 @@ namespace poker_handhistory_org
     /// re-entries then each one should be represented by this object within the  tournament_rebuys array.
     /// </para>
     /// </summary>
-    class TournamentRebuyObject
+    public class TournamentRebuyObject
     {
         /// <summary>
         /// Creates a new TournamentRebuyObject

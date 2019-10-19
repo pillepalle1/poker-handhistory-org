@@ -10,7 +10,7 @@ namespace poker_handhistory_org
     /// 
     /// <para>The player object defining one of the players dealt into the hand</para>
     /// </summary>
-    class PlayerObject
+    public class PlayerObject
     {
         /// <summary>
         /// Creates a new player object defining one of the players dealt into the hand
@@ -20,7 +20,7 @@ namespace poker_handhistory_org
         /// <param name="name">The name of the player as displayed at the table</param>
         /// <param name="startingStack">The starting stack of the player at the beginning of the hand</param>
         /// <param name="playerBounty">The amount that will be awarded as a bounty to the player that eliminates this player from a tournament</param>
-        public PlayerObject(int id, int seat, string name, double startingStack, double playerBounty)
+        public PlayerObject(int id, int seat, string name, double startingStack, double? playerBounty)
         {
             Id = id;
             Seat = seat;
@@ -76,7 +76,7 @@ namespace poker_handhistory_org
         /// <para>For bounty tournaments only</para>
         /// </summary>
         [JsonProperty("player_bounty")]
-        public double Bounty
+        public double? Bounty
         {
             get;
             private set;

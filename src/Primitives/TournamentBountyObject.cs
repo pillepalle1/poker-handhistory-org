@@ -10,7 +10,7 @@ namespace poker_handhistory_org
     /// 
     /// <para>An object defining specific tournament bounties in the tournament.</para>
     /// </summary>
-    class TournamentBountyObject
+    public class TournamentBountyObject
     {
         /// <summary>
         /// Creates a new instance of a TournamentBountyObject

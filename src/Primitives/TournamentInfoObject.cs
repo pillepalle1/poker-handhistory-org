@@ -10,7 +10,7 @@ namespace poker_handhistory_org
     /// 
     /// <para>The object defining the tournament</para>
     /// </summary>
-    class TournamentInfoObject
+    public class TournamentInfoObject
     {
         /// <summary>
         /// Creates a new TournamentInfoObject
