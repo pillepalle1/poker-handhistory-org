@@ -25,6 +25,7 @@ namespace poker_handhistory_org
         {
             ActionNumber = actionNumber;
             PlayerId = playerId;
+            Action = action;
             Amount = amount;
             IsAllIn = isAllIn;
             Cards = cards;

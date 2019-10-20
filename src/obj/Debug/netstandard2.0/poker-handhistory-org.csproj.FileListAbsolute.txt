@@ -1,7 +1,6 @@
 D:\buka\github\server\src\poker-handhistory-org\src\bin\Debug\netstandard2.0\poker-handhistory-org.deps.json
 D:\buka\github\server\src\poker-handhistory-org\src\bin\Debug\netstandard2.0\poker-handhistory-org.dll
 D:\buka\github\server\src\poker-handhistory-org\src\bin\Debug\netstandard2.0\poker-handhistory-org.pdb
-D:\buka\github\server\src\poker-handhistory-org\src\obj\Debug\netstandard2.0\poker-handhistory-org.csprojAssemblyReference.cache
 D:\buka\github\server\src\poker-handhistory-org\src\obj\Debug\netstandard2.0\poker-handhistory-org.AssemblyInfoInputs.cache
 D:\buka\github\server\src\poker-handhistory-org\src\obj\Debug\netstandard2.0\poker-handhistory-org.AssemblyInfo.cs
 D:\buka\github\server\src\poker-handhistory-org\src\obj\Debug\netstandard2.0\poker-handhistory-org.dll
